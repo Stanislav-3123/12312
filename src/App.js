@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
-import axios from 'axios';
+import { countryAPI } from './api/api';
+import Countries from './components/Countries';
+import Pagination from './components/Pagination';
 
 function App() {
 	const [countries, setCountries] = useState([])
@@ -11,19 +13,23 @@ function App() {
 	useEffect(() => {
 		const getCountries = async () => {
 		setLoading(true)
-		const res = await axios.get('https://api.countrylayer.com/v2/all',
-		headers: {
-			"access_key": "dc042cc89221b93fbac8f29cd5a4536a"
-		})
-		
-		
-		console.log(res)
+		const res = await countryAPI.getAllCountries()
+		// console.log(res.data)
+		setCountries(res.data)
+		setLoading(false)
 		}
 		getCountries()
 	}, [])
+
+const lastCountryIndex = currentPage * countriesPerPage
+const firstCountryIndex = lastCountryIndex - countriesPerPage
+const currentCountry = countries.slice(firstCountryIndex, lastCountryIndex)
+
   return (
-    <div>
-     
+    <div className='container mt-5'>
+     <h1 className='text-primary'>Countries</h1>
+	  <Countries countries={countries} loading={loading}/>
+	  <Pagination countriesPerPage={countriesPerPage} totalCountries/>
     </div>
   );
 }
