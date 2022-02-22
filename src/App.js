@@ -33,10 +33,10 @@ const prevPage = () => setCurrentPage(prev => prev - 1)
     <div className='container mt-5'>
      <h1 className='text-primary'>Countries</h1>
 	  <Countries countries={currentCountry} loading={loading}/>
-	  <Pagination countriesPerPage={countriesPerPage} 
+	  {/* <Pagination countriesPerPage={countriesPerPage} 
 	  totalCountries={countries.length}
 	  paginate={paginate}
-	  />
+	  /> */}
 	  <button className='btn btn-primary'onClick={prevPage}>Prev Page</button>
 	  <button className='btn btn-primary ms-2'onClick={nextPage}>Next Page</button>
     </div>
