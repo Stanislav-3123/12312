@@ -8,4 +8,5 @@ export const countryAPI = {
 	getAllCountries() {
 		return instance.get();
 	}
+	
 }
